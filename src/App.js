@@ -16,8 +16,11 @@ class App extends Component {
 		this.state = {
 			itemsArray: [],
 			itemsTemp: [],
+			recAuthor: [],
+			recSubject: [],
 			numBooks: 0,
 			numPages: 0,
+
 		};
 	}
 	
@@ -83,6 +86,10 @@ class App extends Component {
 						<h3> Pages per month:  {(this.state.numPages/12.0).toFixed(2)}</h3>
 						<h3> Pages per week:  {(this.state.numPages/52.0).toFixed(2)}</h3>
 						<h3> Pages per day:  {(this.state.numPages/365.0).toFixed(2)}</h3>
+						<h2> More From {this.state.recAuthor} </h2>
+						<Card items={this.state.recAuthor}/>
+						<h2> More From {this.state.recGenre} </h2>
+						<Card items={this.state.recGenre}/>
 					</Container>
 				</Layout>
 			);
