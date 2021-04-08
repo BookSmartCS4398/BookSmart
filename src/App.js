@@ -68,8 +68,10 @@ class App extends Component {
 			return <div> Loading ... </div>;
 		}
 		else {
+
 			return (
 				<Layout>
+
 					<Container>
 						<input type="text" value={this.state.new} onChange={(e) =>this.handleChange(e.target.value)} />
 						<input type="submit" value="Add Book" onClick={() => this.handleSubmit()} />

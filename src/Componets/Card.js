@@ -5,7 +5,7 @@ const Cards = ({ items }) => {
 
     return (
       <div className="row">
-      
+
         {items.map(item => (
           <span>
             <div className="card mb-4" key={item.publishers}>
@@ -19,6 +19,7 @@ const Cards = ({ items }) => {
           </span>
         ))}
       </div>
+      
     )
 }
 
