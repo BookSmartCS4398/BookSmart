@@ -1,5 +1,10 @@
-import './App.css';
 import React, { Component } from 'react';
+import './App.css';
+
+import Layout from './Componets/Layout';
+import Header from './Componets/Header';
+import Container from './Componets/Container';
+import Card from './Componets/Card';
 
 //created global variable
 //var numBooks= 0
@@ -27,19 +32,19 @@ class App extends Component {
 					isLoaded: true,
 					itemsArray: json,
 					itemsArray: this.state.itemsArray.concat([json]),
-					numBooks: this.state.numBooks+1,
-					numPages: this.state.numPages+ json.number_of_pages,
+					numBooks: this.state.numBooks + 1,
+					numPages: this.state.numPages + json.number_of_pages,
+
 				})
 				
 			});
-			
-    }
+	}
 
-    handleChange(value) {
-        this.setState({
-            new: value
-        });
-    }
+	handleChange(value) {
+		this.setState({
+			new: value
+		});
+	}
 	
 	componentDidMount() {
 
@@ -54,7 +59,6 @@ class App extends Component {
 			});
 	}
 
-	
 	render() {
 		
 		var {isLoaded, items } = this.state;
@@ -65,43 +69,25 @@ class App extends Component {
 		}
 		else {
 			return (
-				<div className="App">
-					
-                <input type="text" value={this.state.new} onChange={(e) =>this.handleChange(e.target.value)} />
-                <input type="submit" value="Add Book" onClick={() => this.handleSubmit()} />
-
-					<h2 align="left">Your Books</h2>
-					<table>
-					  <thead>
-						<tr>				
-							<div>
-								{this.state.itemsArray.map(item => (
-									<div key={item.publishers}>Title: {item.title} | Pages: {item.number_of_pages}</div>
-								))}
-							</div>
-						</tr>
-					  </thead>
-					  <tbody>         
-					  </tbody>
-					</table>
-										
-					<h3>Number of books read: {this.state.numBooks}</h3>
-					<h3></h3>
-					<h2>Congrats you read this many pages:  {this.state.numPages}</h2>
-					<h3> Pages per month:  {(this.state.numPages/12.0).toFixed(2)}</h3>
-					<h3> Pages per week:  {(this.state.numPages/52.0).toFixed(2)}</h3>
-					<h3> Pages per day:  {(this.state.numPages/365.0).toFixed(2)}</h3>
-				</div>
+				<Layout>
+					<Container>
+						<input type="text" value={this.state.new} onChange={(e) =>this.handleChange(e.target.value)} />
+						<input type="submit" value="Add Book" onClick={() => this.handleSubmit()} />
+						<h2 align="left">&nbsp;&nbsp;Your Books</h2>
+						<Card items={this.state.itemsArray}/>
+						<h3>Number of books read: {this.state.numBooks}</h3>
+						<h3/>
+						<h2>Congrats you read this many pages:  {this.state.numPages}</h2>
+						<h3> Pages per month:  {(this.state.numPages/12.0).toFixed(2)}</h3>
+						<h3> Pages per week:  {(this.state.numPages/52.0).toFixed(2)}</h3>
+						<h3> Pages per day:  {(this.state.numPages/365.0).toFixed(2)}</h3>
+					</Container>
+				</Layout>
 			);
 		}
 	}
 
 	
-	//calculate the total pages
-	calculateAvgMonth() {
-
-		
-	}
 }
 
 export default App;
