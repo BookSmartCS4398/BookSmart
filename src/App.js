@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import './UI/addBookButton';
+import logo from './booksmartlogo.png';
+
 
 import Layout from './Componets/Layout';
 import Header from './Componets/Header';
 import Container from './Componets/Container';
 import Card from './Componets/Card';
+
+//Configuring logo
+console.log(logo);
 
 //created global variable
 //var numBooks= 0
@@ -73,16 +79,23 @@ class App extends Component {
 				<Layout>
 
 					<Container>
-						<input type="text" value={this.state.new} onChange={(e) =>this.handleChange(e.target.value)} />
-						<input type="submit" value="Add Book" onClick={() => this.handleSubmit()} />
-						<h2 align="left">&nbsp;&nbsp;Your Books</h2>
+						<div className="rectangle" />
+						<br/><br/>
+						<img src={logo} alt="Logo" height="200px" width="200px" />
+						<br/><br/>
+						<input class="searchBar" type="text" defaultValue="Enter ISBN Here" value={this.state.new} onChange={(e) =>this.handleChange(e.target.value)}/>
+						<button class="ui primary button" type="submit" onClick={() => this.handleSubmit()}>Add Book</button>
+						<h2 align="middle">&nbsp;&nbsp;Your Books</h2>
 						<Card items={this.state.itemsArray}/>
 						<h3>Number of books read: {this.state.numBooks}</h3>
 						<h3/>
-						<h2>Congrats you read this many pages:  {this.state.numPages}</h2>
+						<h2>Congrats! You read this many pages:  {this.state.numPages}</h2>
 						<h3> Pages per month:  {(this.state.numPages/12.0).toFixed(2)}</h3>
 						<h3> Pages per week:  {(this.state.numPages/52.0).toFixed(2)}</h3>
 						<h3> Pages per day:  {(this.state.numPages/365.0).toFixed(2)}</h3>
+						<br/><br/>
+						<div className="rectangle" />
+
 					</Container>
 				</Layout>
 			);
