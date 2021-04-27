@@ -5,9 +5,9 @@ import logo from './booksmartlogo.png';
 
 
 import Layout from './Components/Layout';
-import Header from './Components/Header';
 import Container from './Components/Container';
 import Card from './Components/Card';
+import SubjectCard from './Components/SubjectCard';
 
 //Configuring logo
 console.log(logo);
@@ -21,22 +21,16 @@ class App extends Component {
 		super(props);
 		this.state = {
 			itemsArray: [],
-			itemsTemp: [],
 			numBooks: 0,
 			numPages: 0,
-			Subjects: "",
-			subjectArray: [],
+			subjects: "",
 			bookworkskey: "",
 		};
 	}
-	
-
-
 
 	handleSubmit(value){
 		var url = 'https://openlibrary.org/isbn/' + this.state.new + '.json'
-		
-		fetch(url)
+			fetch(url)
 			.then(res => res.json())
 			.then(json => {
 				this.setState({
@@ -62,23 +56,29 @@ class App extends Component {
 	}
 
 	getSubject(){
-		var tempSubject;
-		var tempkey = this.state.bookworkskey;
-		console.log(this.state.bookworkskey)
-		var url1 = 'https://openlibrary.org' + this.state.bookworkskey + '.json'
-		fetch(url1)
+		var url = 'https://openlibrary.org' + this.state.bookworkskey + '.json'
+		fetch(url)
 			.then(res => res.json())
 			.then(json => {
 				this.setState({
-					Subjects: json.subjects[0],
+					subjects: json.subjects[0],
 				})
 			})
-		var url2 = 'https://openlibrary.org/subjects/' + this.state.Subjects + '.json?details=true'
-		fetch(url2)
+		setTimeout(() => { this.getWorksFromSubject()  }, 200)
+	}
+
+	getWorksFromSubject(){
+		var url = 'https://openlibrary.org/subjects/' + (this.state.subjects).toLowerCase() + '.json'
+		fetch(url)
 			.then(res => res.json())
 			.then(json => {
 				this.setState({
-					subjectArray: json.works,
+					//subjectArray:[],
+					//subjectArray: [json.works].map(json => Object.assign([json])),
+					//subjectArray: JSON.parse([json.works]),
+					subjectArray: (json.works),
+
+					//subjectArray: JSON.parse(JSON.stringify(json.works)),
 				})
 			})
 	}
@@ -98,14 +98,13 @@ class App extends Component {
 
 	render() {
 		
-		var {isLoaded, items } = this.state;
+		var {isLoaded, items} = this.state;
 		var bookISBN = '9780140328721' //for testing only
 		
 		if (!isLoaded) {
 			return <div> Loading ... </div>;
 		}
 		else {
-
 			return (
 				<Layout>
 				<div className="rectangle" />
@@ -125,12 +124,10 @@ class App extends Component {
 						<h3> Pages per day:  {(this.state.numPages/365.0).toFixed(2)}</h3>
 						<br/><br/>
 						<h2 align={"left"}>More In {this.state.Subjects}</h2>
-						<Card items={this.state.subjectArray}/>
-						Test: {this.state.bookworkskey}
+						<SubjectCard subject={this.state.subjectArray}/>
 					</Container>
-					<div className="rectangle"/>
+				<div className="rectangle"/>
 				</Layout>
-				
 			);
 		}
 	}	
