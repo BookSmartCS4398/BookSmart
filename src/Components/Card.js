@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Cards = ({ items }) => {
-    console.log({items})
-
+var Cards = ({ items }) => {
+  console.log({items})
     return (
-      <div className="row">
 
+      <div className="row">
+      
         {items.map(item => (
           <span>
             <div className="card mb-4" key={item.publishers}>
@@ -19,7 +19,6 @@ const Cards = ({ items }) => {
           </span>
         ))}
       </div>
-      
     )
 }
 

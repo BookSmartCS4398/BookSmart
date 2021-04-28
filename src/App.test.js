@@ -26,7 +26,7 @@ test('renders, image logo component', () =>{
   expect(componentIsDeleted).toBeTruthy();
 });
 
-test('Existing ISBN, cover grabbed from API', () =>{
+test('Existing ISBN, book cover grabbed from API', () =>{
 	var url = 'https://covers.openlibrary.org/b/isbn/9780140328721-M.jpg';
 	expect(<img src={'url'}/>).toBeTruthy();
 
