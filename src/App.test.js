@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Card from './Components/Card.js'
 import logo from './booksmartlogo.png';
 
 test('renders cards without crashing', () => {
@@ -23,4 +24,30 @@ test('renders, image logo component', () =>{
   expect(Image).toBeTruthy();
   const componentIsDeleted = ReactDOM.unmountComponentAtNode(div);
   expect(componentIsDeleted).toBeTruthy();
+});
+test('renders, image cover component', () =>{
+	var url = 'https://openlibrary.org/isbn/9780140328721.json'
+	var items;
+		fetch(url)
+			.then(res => res.json())
+			.then(json => {
+				this.setState({
+					items: json,
+					items: this.state.items.concat([json])				
+				})
+			});
+	const{coverImgComponent} = render(<Card items={items}/>);
+
+	expect(coverImgComponent).toBeTruthy();
+
+});
+test('Existing ISBN, grabbed from API', () =>{
+
+});
+test('Nonexisting ISBN, could not find on API', () =>{
+
+});
+test('Incorrect ISBN, not in correct format', () =>{
+
+
 });
