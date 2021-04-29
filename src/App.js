@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './UI/addBookButton';
 import logo from './booksmartlogo.png';
-
+import background from './background.jpg';
 
 import Layout from './Components/Layout';
 import Container from './Components/Container';
@@ -30,6 +30,14 @@ class App extends Component {
 
 	handleSubmit(value){
 		var url = 'https://openlibrary.org/isbn/' + this.state.new + '.json'
+		if(this.state.new && (!isNaN(this.state.new) || (this.state.new).includes("-")))
+		{
+			this.getIsbnJson();
+		}
+	}
+
+	getIsbnJson(){
+			var url = 'https://openlibrary.org/isbn/' + this.state.new + '.json'
 			fetch(url)
 			.then(res => res.json())
 			.then(json => {
@@ -46,7 +54,8 @@ class App extends Component {
 				
 			});
 		setTimeout(() => { this.getSubject()  }, 200) //need for state update (workskey var)
-		
+	
+
 	}
 
 	handleChange(value) {
@@ -69,6 +78,7 @@ class App extends Component {
 
 	getWorksFromSubject(){
 		var url = 'https://openlibrary.org/subjects/' + (this.state.subjects).toLowerCase() + '.json'
+		//MUST be lowercase, 
 		fetch(url)
 			.then(res => res.json())
 			.then(json => {
