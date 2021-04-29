@@ -45,6 +45,16 @@ li {
 .row {
   display: flex;
 }
+.searchBar {
+  height: 35px;
+  width: 200px;
+}
+.rectangle {
+  display: inline-block;
+  width: 10000px;
+  height: 100px;
+  background: rgb(218, 180, 10);
+}
 
 @keyframes App-logo-spin {
   from {
