@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './UI/addBookButton';
 import logo from './booksmartlogo.png';
-import background from './background.jpg';
+import background from './background.png';
 
 import Layout from './Components/Layout';
 import Container from './Components/Container';
